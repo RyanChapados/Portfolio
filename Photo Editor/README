@@ -1,0 +1,143 @@
+Controller Package:
+    Command Package:
+        The classes in the command package are commands that the controller can accept. Each one
+        just runs a single command that it is associated with, and then sends a message to the view
+        saying that the action was completed.
+
+        PhotoControllerCommand:
+            This interface represents a command that the user can input to the controller. It has a
+            single method, run, which runs a command on the given model. Run can throw an exception
+            if the inputs given cause an exception in the model. Once the operation is completed,
+            run will inform the user that the operation has been completed. If an exception is
+            thrown, this message will not be shown.
+
+        AbstractControllerCommand:
+            This is an abstract version of a command. It has 3 fields, the imageName, the
+            destName, and the view, which are common to all of the commands. The imageName is the
+            name of the image in the program. The destName is where the image will be saved in the
+            program after the command is performed. The view is used to send a message to the user
+            saying that the operation has been completed. If any null value is given to the
+            constructor, it will throw an exception.
+
+        BrightenCommand:
+            This command performs the brighten operation on a given model. It has an additional
+            field called inc, which represents the increment to brighten the image by. If the
+            constructor is given a null value of inc, it will throw an exception. It will also
+            throw an exception if the value of inc, which is taken as a string, does not have an int
+            in it.
+
+        FlipCommand:
+            This command performs the flip operation on a given model. It has an additional field
+            called type which is an enum representing the kind of flip that will be performed. If
+            this value is given to the constructor as null, it will throw an exception.
+
+        GreyscaleCommand:
+            This command performs the greyscale operation on a given model. It has an additional
+            field called type which is an enum representing the kind of greyscale that will be
+            performed. If this value is given to the constructor as null, it will throw an
+            exception.
+
+        ColorTransformCommand:
+            Performs a color transform using a given matrix on a given model. It has an additional
+            field arr which is the 2d array used in the color transform. This array must be 3x3
+
+        ColorTransformCommand:
+            Performs a filters using a given matrix on a given model. It has an additional
+            field arr which is the 2d array used in the color transform. This array must be a square
+            have odd dimensions and a size >= 1.
+
+        LoadCommand:
+            This command saves an image from a given model to a given destination.
+
+        SaveCommand:
+             This command loads an image to a given model from a given destination.
+
+
+    PhotoEditorController:
+        This interface represents the actions a controller can take. It only has one method,
+        runController, which simply runs the controller. It will throw an IllegalStateException if
+        the controller fails.
+
+    PhotoEditorControllerImpl:
+        This class is an implementation of the PhotoEditorController interface. It has 4 fields,
+        Map<String, Function<Scanner, PhotoControllerCommand>> knownCommands, a PhotoEditorModel
+        model, a PhotoEditorView view and a Readable input. The constructor takes in 3 arguments
+        for input, model, and view, and throws an exception if any are null. It then sets up the
+        list of known commands using those from the command package. the method runController uses
+        the Command Design Pattern. It continues to take input from the user until it cannot find
+        any more or the user quits the program by entering quit. If a command is not valid, it
+        will tell the user. It will also inform the user if their inputs do not work.
+
+Model Package:
+    FlipType:
+        An enum representing the different kinds of flip that the model can perform.
+
+    Greyscale:
+        An enum representing the different kinds of greyscale that the model can perform.
+
+    PhotoEditorModel:
+        An interface representing all the operations a model can perform.
+
+    PhotoEditorModelImpl:
+        An implementation of the interface. Can load/save multiple images and perform operations on
+        them
+
+    PixelRGB:
+        An interface representing a pixel with an R, G, and B value.
+
+    PixelRGBImpl:
+        An implementation of a PixelRGB. Has a max value colors can be and a min of 0
+
+    PPMImage:
+        An interface representing an image with an array of pixels.
+
+    PPMImageImpl:
+        An implementation of a PPMImage. Has a max value colors can be, width, height, and an array
+        of pixel data
+
+    PhotoEditorModelImpl:
+        An implementation of the interface. Can load/save multiple images and perform operations on
+        them
+
+    MockModel:
+        A mock implementation of PhotoEditorModel. It has one field, a StringBuilder log. All of the
+        methods in this class simply append their inputs to the log. This class is used for testing.
+
+View Package:
+    PhotoEditorView:
+        This is the interface for the view. It has one method, renderMessage, which simply
+        renders a given message to the views data destination. This method throws an exception if
+        there is an error doing this.
+
+    PhotoEditorViewImpl:
+        This is an implementation of the PhotoEditorView interface. It has one field, an Appendable
+        destination. The constructor ensures destination is not null. The renderMessage method
+        simply tries to append the given message to destination.
+
+COMMANDS TO RUN:
+    load res/BaseImage.ppm test
+    vertical-flip test newTest
+    blur newTest newTest2
+    sepia newTest newTest3
+    value-component newTest3 finalTest
+    save res/NewImage.ppm finalTest
+
+    Enter each command on a separate line to load an image, vertically flip it, greyscale it to
+    value, then save it as NewImage.ppm
+
+IMAGE TAKEN BY RYAN :)))
+
+CHANGES SINCE LAST ASSIGNMENT:
+
+-Filter and ColorTransform commands added to controller (functionality added in model)
+-Load ans Save moved from model to controller to respect CMV design model of IO being handlded by
+	controller
+-PhotoEditorModelImpl now implements PhotoEditorModelEnhanced (which itself implements
+	PhotoEditorModel [which is what PhotoEditorModelImpl used to implement]). This was 
+	done to maintain backwards compatibility while still introducing new filter and 
+	color transform commands
+-tests updated
+-Support for file types added
+-support for command line script running added using [-file FileLocation]
+
+All aspects of program for assignment 4/5 are completed.

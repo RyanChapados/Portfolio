@@ -1,0 +1,87 @@
+COMMANDS:
+
+load:
+	load FileLocationToLoad FileNameToSave
+	
+	Loads image from file path FileLocationToLoad and saves it to FileNameToSave.
+	Multiple images can be loaded at once. No other commands will work without 
+	loading an image first. Supports .ppm .jpg .png
+	
+save:
+	save FileLocationToSave FileNameToSave
+	
+	Saves a given image FileNameToSave to file path FileLocationToSave. Extension of filepath
+	determines filetype. Supports .ppm .jpg .png
+	
+brighten:
+	brighten FileNameToEdit FileNameToSave BrightenValue
+	
+	Brightens a given image FileNameToEdit by BrightenValue and saves it to FileNameToSave. 
+	BrightenValue can be negative and MUST be an integer. Will clamp values to maximum/minimum 
+	pixel brightness (generally 0-255).
+
+red-component:
+	red-component FileNameToEdit FileNameToSave
+	
+	Greyscales a given image FileNameToEdit and saves it to FileNameToSave. Greyscale based on 
+	the red RGB values of each pixel.
+	
+green-component:
+	green-component FileNameToEdit FileNameToSave
+	
+	Greyscales a given image FileNameToEdit and saves it to FileNameToSave. Greyscale based on 
+	the green RGB values of each pixel.
+	
+blue-component:
+	blue-component FileNameToEdit FileNameToSave
+	
+	Greyscales a given image FileNameToEdit and saves it to FileNameToSave. Greyscale based on 
+	the blue RGB values of each pixel.
+	
+value-component:
+	value-component FileNameToEdit FileNameToSave
+	
+	Greyscales a given image FileNameToEdit and saves it to FileNameToSave. Greyscale based on 
+	the value of each pixel.
+	
+intensity-component:
+	intensity-component FileNameToEdit FileNameToSave
+	
+	Greyscales a given image FileNameToEdit and saves it to FileNameToSave. Greyscale based on 
+	the intensity of each pixel.
+	
+luma-component:
+	luma-component FileNameToEdit FileNameToSave
+	
+	Greyscales a given image FileNameToEdit and saves it to FileNameToSave. Greyscale based on 
+	the luma of each pixel.
+	
+horizontal-flip:
+	horizontal-flip FileNameToEdit FileNameToSave
+	
+	Horizontally flips a given image FileNameToEdit and saves it to FileNameToSave.
+	
+vertical-flip:
+	vertical-flip FileNameToEdit FileNameToSave
+	
+	Vertically flips a given image FileNameToEdit and saves it to FileNameToSave.
+	
+sepia:
+	sepia FileNameToEdit FileNameToSave
+	
+	Color transforms a given image FileNameToEdit using sepia and saves it to FileNameToSave.
+	
+greyscale:
+	greyscale FileNameToEdit FileNameToSave
+	
+	Color transforms a given image FileNameToEdit using a greyscale transform and saves it to FileNameToSave.
+	
+blur:
+	blur FileNameToEdit FileNameToSave
+	
+	Blurs a given image FileNameToEdit and saves it to FileNameToSave.
+	
+sharpen:
+	sharpen FileNameToEdit FileNameToSave
+	
+	Sharpens a given image FileNameToEdit and saves it to FileNameToSave.
